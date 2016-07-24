@@ -341,8 +341,15 @@ $(document).ready(function(){
 
     var makeRow = function(label, cand) {
         var row = $("<tr></tr>");
-        row.append("<td>" + label + "</td>")
-        row.append($("<td>" + Math.min.apply(null, cand) + "〜" + Math.max.apply(null, cand) + "</td>"));
+        row.append("<td>" + label + "</td>");
+
+        var min = Math.min.apply(null, cand);
+        var max = Math.max.apply(null, cand);
+        if (min == max) {
+            row.append($("<td>" + min + "</td>"));
+        } else {
+            row.append($("<td>" + min + "〜" + max + "</td>"));
+        }
         return row;
     }
 
