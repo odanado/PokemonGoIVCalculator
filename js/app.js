@@ -270,7 +270,10 @@ $(document).ready(function(){
             row.append("<td>" + res[i]['defense'] + "</td>")
             row.append("<td>" + res[i]['stamina'] + "</td>")
             result.append(row);
-            
+        }
+
+        if (res.length == 0) {
+            $('#attention').text('個体値を計算できませんでした．CPとHPが10だと個体値の計算に失敗する場合があります．')
         }
         
     })
