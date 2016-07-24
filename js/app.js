@@ -223,59 +223,97 @@ $(document).ready(function(){
         return Math.max(10, Math.floor(sum(base, iv, 'stamina') * cpm));
     }
 
-    var calcIV = function(result, cur_cp, cur_hp, level, base) {
+    var calcIV = function(result, level) {
+        var base = getBaseStats($('input[name="name"]').val());
+        var curCP = $('input[name="cp"]').val();
+        var curHP = $('input[name="hp"]').val();
+
         for(var s = 0; s < 16; s++) {
             var hp = calcHP(base, {stamina: s}, CPM[level]);
-            if (hp != cur_hp) continue;
+            if (hp != curHP) continue;
 
             for(var a = 0; a < 16; a++) {
                 for(var d = 0; d < 16; d++) {
                     var iv = {stamina: s, attack: a, defense: d};
                     var cp = calcCP(base, iv, CPM[level]);
-                    if (cp == cur_cp) {
+                    if (cp == curCP) {
                         result.push({level: level, attack: a, defense: d, stamina: s});
                     }
                 }
             }
         }
+    }
 
+    var sameIVindexOf = function(ary, value) {
+        var ret = -1;
+        $.each(ary, function(idx, v) {
+            if (v['attack'] == value['attack'] && 
+                v['defense'] == value['defense'] && 
+                v['stamina'] == value['stamina']) {
+                    ret = idx;
+                }
+        })
+        return ret;
+    }
 
+    var intersect = function(ary1, ary2) {
+        var ret = [];
+        $.each(ary1, function(idx, v) {
+            if (sameIVindexOf(ary2, v) != -1) {
+                ret.push(v);
+            }
+        })
+
+        return ret;
     }
     
-    $('#calcCP').on('click', function(e) {
-        var base = getBaseStats($('input[name="name"]').val());
+    var candIVs;
+
+    var refineIV = function() {
         var level = $('#stardust').val() * 4;
-        var resultTable = $("#resultTable");
-        var result = $("#result");
-        var cur_cp = $('input[name="cp"]').val();
-        var cur_hp = $('input[name="hp"]').val();
-
-        var candStamina = [];
-        var candAttack = [];
-        var candDefense = [];
-
-        resultTable.empty();
-        result.empty();
-
-        res = []
+        var res = [];
 
         for(var i = 0; i < 4; i++) {
-            calcIV(res, cur_cp, cur_hp, level + i, base)
+            calcIV(res, level + i);
         }
+        if (candIVs == null) {
+            candIVs = res;
+        }
+        else {
+            candIVs = intersect(candIVs, res);
+        }
+    }
 
-        for(var i = 0; i < res.length; i++) {
+    var renderCandIV = function() {
+        var result = $("#result");
+        result.empty();
+
+        for(var i = 0; i < candIVs.length; i++) {
             var row = $("<tr></tr>");
-            row.append("<td>" + (res[i]['level'] / 2 + 1) + "</td>")
-            row.append("<td>" + res[i]['attack'] + "</td>")
-            row.append("<td>" + res[i]['defense'] + "</td>")
-            row.append("<td>" + res[i]['stamina'] + "</td>")
+            row.append("<td>" + (candIVs[i]['level'] / 2 + 1) + "</td>")
+            row.append("<td>" + candIVs[i]['attack'] + "</td>")
+            row.append("<td>" + candIVs[i]['defense'] + "</td>")
+            row.append("<td>" + candIVs[i]['stamina'] + "</td>")
             result.append(row);
         }
 
-        if (res.length == 0) {
+        if (candIVs.length == 0) {
             $('#attention').text('個体値を計算できませんでした．CPとHPが10だと個体値の計算に失敗する場合があります．')
         }
-        
+    }
+
+    $('#calcCP').on('click', function(e) {
+        candIVs = null;
+
+        refineIV();
+
+        renderCandIV();
+    })
+
+    $('#refine').on('click', function(e) {
+        refineIV();
+
+        renderCandIV();
     })
 
     var makeRow = function(label, cand) {
