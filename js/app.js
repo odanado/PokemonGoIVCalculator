@@ -192,7 +192,6 @@ $(document).ready(function(){
         minLength: 2
     });
     var init = function() {
-        console.log("hoge");
         var stardust = $('#stardust')
         for (var i = 0; i < requireStardust.length; i++) {
             stardust.append($("<option>").val(i).text(requireStardust[i]));
