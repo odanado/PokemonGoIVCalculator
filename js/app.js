@@ -178,6 +178,19 @@ $(document).ready(function(){
         0.7817901, 0.784637, 0.7874736, 0.7903, 0.7931164
     ]
 
+    var makeNames = function() {
+        names = []
+        $.each(pokedex, function(idx, data) {
+            names.push(data['name'])
+        })
+        return names;
+    }
+    $('#name').autocomplete({
+        source: makeNames(),
+        autoFocus: true,
+        delay: 500,
+        minLength: 2
+    });
     var init = function() {
         console.log("hoge");
         var stardust = $('#stardust')
@@ -245,7 +258,7 @@ $(document).ready(function(){
         result.empty();
 
         res = []
-        
+
         for(var i = 0; i < 4; i++) {
             calcIV(res, cur_cp, cur_hp, level + i, base)
         }
