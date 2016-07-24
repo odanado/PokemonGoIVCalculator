@@ -314,21 +314,13 @@ $(document).ready(function(){
         }));
         rangeResult.append(row);
 
-        row = makeRow('攻撃', $.map(candIVs, function(v, idx) {
-            return v['attack'];
-        }));
-        rangeResult.append(row);
-
-        row = makeRow('防御', $.map(candIVs, function(v, idx) {
-            return v['defense'];
-        }));
-        rangeResult.append(row);
-
-        row = makeRow('スタミナ', $.map(candIVs, function(v, idx) {
-            return v['stamina'];
-        }));
-        rangeResult.append(row);
-
+        var iter = {attack: '攻撃', defense: '防御', stamina: 'スタミナ'};
+        $.each(iter, function(key, value) {
+            row = makeRow(value, $.map(candIVs, function(v, idx) {
+                return v[key];
+            }));
+            rangeResult.append(row);
+        })
     }
 
     $('#calcCP').on('click', function(e) {
