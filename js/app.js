@@ -208,6 +208,15 @@ $(document).ready(function(){
         return base
     }
 
+    var getInput = function() {
+        return {
+            name: $('input[name="name"]').val(),
+            cp: +$('input[name="cp"]').val(),
+            hp: +$('input[name="hp"]').val(),
+            stardustIndex: +$('#stardust').val()
+        };
+    }
+
     var sum = function(base, iv, type) {
         return base[type] + iv[type];
     }
@@ -222,10 +231,10 @@ $(document).ready(function(){
         return Math.max(10, Math.floor(sum(base, iv, 'stamina') * cpm));
     }
 
-    var calcIV = function(result, level) {
-        var base = getBaseStats($('input[name="name"]').val());
-        var curCP = $('input[name="cp"]').val();
-        var curHP = $('input[name="hp"]').val();
+    var calcIV = function(result, level, input) {
+        var base = getBaseStats(input.name);
+        var curCP = input.cp;
+        var curHP = input.hp;
 
         for(var s = 0; s < 16; s++) {
             var hp = calcHP(base, {stamina: s}, CPM[level]);
@@ -268,12 +277,12 @@ $(document).ready(function(){
     
     var candIVs;
 
-    var refineIV = function() {
-        var level = $('#stardust').val() * 4;
+    var refineIV = function(input) {
+        var level = input.stardustIndex * 4;
         var res = [];
 
         for(var i = 0; i < 4; i++) {
-            calcIV(res, level + i);
+            calcIV(res, level + i, input);
         }
         if (candIVs == null) {
             candIVs = res;
@@ -281,6 +290,20 @@ $(document).ready(function(){
         else {
             candIVs = intersect(candIVs, res);
         }
+    }
+
+    var clearInputHistory = function() {
+        $("#input-history").empty();
+    }
+
+    var renderInputHistory = function(input) {
+        var $inputHistory = $("#input-history");
+
+        var row = $("<tr></tr>");
+        row.append("<td>" + input.cp + "</td>");
+        row.append("<td>" + input.hp + "</td>");
+        row.append("<td>" + requireStardust[input.stardustIndex] + "</td>");
+        $inputHistory.append(row);
     }
 
     var renderCandIV = function() {
@@ -325,16 +348,22 @@ $(document).ready(function(){
 
     $('#calcCP').on('click', function(e) {
         candIVs = null;
+        var input = getInput();
+        clearInputHistory();
 
-        refineIV();
+        refineIV(input);
 
+        renderInputHistory(input);
         renderRangeIV();
         renderCandIV();
     })
 
     $('#refine').on('click', function(e) {
-        refineIV();
+        var input = getInput();
+        
+        refineIV(input);
 
+        renderInputHistory(input);
         renderRangeIV();
         renderCandIV();
     })
