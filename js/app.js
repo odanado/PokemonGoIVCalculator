@@ -299,6 +299,9 @@ $(document).ready(function(){
         if (candIVs.length == 0) {
             $('#attention').text('個体値を計算できませんでした．CPとHPが10だと個体値の計算に失敗する場合があります．')
         }
+        else {
+            $('#attention').text('');
+        }
     }
 
     $('#calcCP').on('click', function(e) {
