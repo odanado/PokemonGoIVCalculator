@@ -304,17 +304,38 @@ $(document).ready(function(){
         }
     }
 
+    var renderRangeIV = function() {
+        var rangeResult = $("#rangeResult");
+
+        rangeResult.empty();
+
+        var row = makeRow('レベル', $.map(candIVs, function(v, idx) {
+            return v['level'] / 2 + 1;
+        }));
+        rangeResult.append(row);
+
+        var iter = {attack: '攻撃', defense: '防御', stamina: 'スタミナ'};
+        $.each(iter, function(key, value) {
+            row = makeRow(value, $.map(candIVs, function(v, idx) {
+                return v[key];
+            }));
+            rangeResult.append(row);
+        })
+    }
+
     $('#calcCP').on('click', function(e) {
         candIVs = null;
 
         refineIV();
 
+        renderRangeIV();
         renderCandIV();
     })
 
     $('#refine').on('click', function(e) {
         refineIV();
 
+        renderRangeIV();
         renderCandIV();
     })
 
