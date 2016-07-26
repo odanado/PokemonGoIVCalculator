@@ -56,27 +56,28 @@
             <hr><br>
 
             <div class="row">
-                <div class="col-md-2">
-                    <label>ポケモン名
-                        <input type="text" id="name" name="name" class="form-control hidden-xs hidden-sm" value="フシギダネ"/>
-                        <select id="select-name" class="form-control hidden-md hidden-lg"></select>
-                    </label>
+                <div class="col-md-2 form-group">
+                    <label>ポケモン名</label>
+                    <input type="text" id="name" name="name" class="form-control hidden-xs hidden-sm" value="フシギダネ"/>
+                    <select id="select-name" class="form-control hidden-md hidden-lg"></select>
                 </div>
-                <div class="col-md-2">
-                    <label>CP<input type="number" name="cp" class="form-control" value="10"/></label>
+                <div class="col-md-2 form-group">
+                    <label>CP</label>
+                    <input type="number" name="cp" class="form-control" value="10"/>
                 </div>
-                <div class="col-md-2">
-                    <label>HP<input type="number" name="hp" class="form-control" value="10"/></label>
+                <div class="col-md-2 form-group">
+                    <label>HP</label>
+                    <input type="number" name="hp" class="form-control" value="10"/>
                 </div>
-                <div class="col-md-2">
-                    <label>ほしのすな
-                        <select class="form-control" id="stardust">
-                        </select>
-                    </label>
+                <div class="col-md-2 form-group">
+                    <label>ほしのすな</label>
+                    <select class="form-control" id="stardust">
+                    </select>
                 </div>
-                <div class="col-md-2">
-                    <label>&nbsp;<input type="button" class="form-control" value="計算" id="calcCP"/></label>
-                    <label>&nbsp;<input type="button" class="form-control" value="絞り込み" id="refine"/></label>
+                <div class="col-md-3 form-group">
+                    <div style="height:25px;" class="hidden-xs hidden-sm"></div>
+                    <input type="button" class="btn btn-sm" value="計算" id="calcCP"/>
+                    <input type="button" class="btn btn-sm"" value="絞り込み" id="refine"/>
                 </div>
             </div>
             
