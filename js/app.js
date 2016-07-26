@@ -227,6 +227,16 @@ $(document).ready(function(){
         return base[type] + iv[type];
     }
 
+    var getRangeText = function(ary) {
+        var min = Math.min.apply(null, ary);
+        var max = Math.max.apply(null, ary);
+        if (min == max) {
+            return min;
+        } else {
+            return min + "〜" + max;
+        }
+    }
+
     var calcCP = function(base, iv, cpm) {
         var cp = sum(base, iv, 'attack') * Math.pow(sum(base, iv, 'defense'), 0.5) * 
                     Math.pow(sum(base, iv, 'stamina'), 0.5) * Math.pow(cpm, 2) / 10
@@ -338,18 +348,38 @@ $(document).ready(function(){
 
         rangeResult.empty();
 
-        var row = makeRow('レベル', $.map(candIVs, function(v, idx) {
-            return v['level'] / 2 + 1;
-        }));
-        rangeResult.append(row);
+        var result = {};
+        var iter = {level: 'レベル', attack: '攻撃', defense: '防御', stamina: 'スタミナ'};
 
-        var iter = {attack: '攻撃', defense: '防御', stamina: 'スタミナ'};
         $.each(iter, function(key, value) {
-            row = makeRow(value, $.map(candIVs, function(v, idx) {
-                return v[key];
-            }));
-            rangeResult.append(row);
-        })
+            result[key] = $.map(candIVs, function(v, idx) {
+                if (key == 'level') {
+                    return v['level'] / 2 + 1;
+                }
+                else {
+                    return v[key];
+                }
+            });
+            rangeResult.append(makeRow(value, result[key]));
+        });
+
+        var mod = function(ary) {
+            var str = getRangeText(ary);
+            if (str.indexOf('〜') == -1) {
+                return str;
+            }
+            else {
+                return "[" + str + "]";
+            } 
+        }
+
+        var textResult = "";
+        textResult += $('input[name="name"]').val();
+        textResult += "(" + getRangeText(result['level']) + "): "
+        textResult +=  mod(result['attack']) + " - ";
+        textResult +=  mod(result['defense']) + " - ";
+        textResult +=  mod(result['stamina']);
+        $("#text-result").val(textResult);
     }
 
     $('#calcCP').on('click', function(e) {
@@ -385,11 +415,19 @@ $(document).ready(function(){
         var min = Math.min.apply(null, cand);
         var max = Math.max.apply(null, cand);
         if (min == max) {
-            row.append($("<td>" + min + "</td>"));
+            row.append($("<td>" + getRangeText(cand) + "</td>"));
         } else {
-            row.append($("<td>" + min + "〜" + max + "</td>"));
+            row.append($("<td>" + getRangeText(cand) + "</td>"));
         }
         return row;
     }
+    var clipboard = new Clipboard('#copy-result');
 
+    clipboard.on('success', function(e) {
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+
+        e.clearSelection();
+    });
 })

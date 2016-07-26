@@ -13,6 +13,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+        <script src="//cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
         
         <link rel="stylesheet" href="./css/dashboard.css">
         <script src="./js/app.js" ></script>
@@ -112,6 +113,12 @@
                 <tbody id="rangeResult">
                 </tbody>
             </table>
+            <div class="form-group">
+                <input type="text" id="text-result" class="form-control" value=""/>
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-sm"" value="結果をコピー" id="copy-result" data-clipboard-target="#text-result"/>
+            </div>
 
             <br>
             <h3>入力履歴</h3>
