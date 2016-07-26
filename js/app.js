@@ -196,6 +196,12 @@ $(document).ready(function(){
         for (var i = 0; i < requireStardust.length; i++) {
             stardust.append($("<option>").val(i).text(requireStardust[i]));
         }
+
+        var selectName = $('#select-name');
+        $.each(pokedex, function(idx, value) {
+            var name = value['name'];
+            selectName.append($("<option>").val(name).text(name));
+        })
     }
     init();
 
@@ -366,6 +372,10 @@ $(document).ready(function(){
         renderInputHistory(input);
         renderRangeIV();
         renderCandIV();
+    })
+
+    $('#select-name').change(function(e) {
+        $('input[name="name"]').val($(this).val());
     })
 
     var makeRow = function(label, cand) {
