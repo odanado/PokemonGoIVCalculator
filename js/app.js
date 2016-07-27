@@ -231,7 +231,7 @@ $(document).ready(function(){
         var min = Math.min.apply(null, ary);
         var max = Math.max.apply(null, ary);
         if (min == max) {
-            return min;
+            return String(min);
         } else {
             return min + "〜" + max;
         }
@@ -365,6 +365,7 @@ $(document).ready(function(){
 
         var mod = function(ary) {
             var str = getRangeText(ary);
+
             if (str.indexOf('〜') == -1) {
                 return str;
             }
