@@ -50,105 +50,126 @@
             </ol>
 
             <br>
-            <p>
-                ポケモンGOの個体値を計算します。使い方は<a href="./usage.html">こちら</a>。<br>
-                表示される結果については自己責任でご利用ください。
-            </p>
-            <hr><br>
-
             <div class="row">
-                <div class="col-md-2 form-group">
-                    <label>ポケモン名</label>
-                    <input type="text" id="name" name="name" class="form-control hidden-xs hidden-sm" value="フシギダネ"/>
-                    <select id="select-name" class="form-control hidden-md hidden-lg"></select>
-                </div>
-                <div class="col-md-2 form-group">
-                    <label>CP</label>
-                    <input type="number" name="cp" class="form-control" value="10"/>
-                </div>
-                <div class="col-md-2 form-group">
-                    <label>HP</label>
-                    <input type="number" name="hp" class="form-control" value="10"/>
-                </div>
-                <div class="col-md-2 form-group">
-                    <label>ほしのすな</label>
-                    <select class="form-control" id="stardust">
-                    </select>
-                </div>
-                <div class="col-md-3 form-group">
-                    <div style="height:25px;" class="hidden-xs hidden-sm"></div>
-                    <input type="button" class="btn btn-sm" value="計算" id="calcCP"/>
-                    <input type="button" class="btn btn-sm" value="絞り込み" id="refine"/>
-                </div>
-            </div>
-            
-            <br>
-            <div class="control-form">
-                <label>スポンサードリンク
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- PokemonGoIVCalculator -->
-                    <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-9237856222871831"
-                        data-ad-slot="1594234509"
-                        data-ad-format="auto"></ins>
-                    <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </label>
-            </div>
+                <div class="col-md-10">
+                    <p>
+                        ポケモンGOの個体値を計算します。使い方は<a href="./usage.html">こちら</a>。<br>
+                        表示される結果については自己責任でご利用ください。
+                    </p>
+                    <hr><br>
 
-            <br>
-            <div id="attention">
-            </div>
-            <br>
-            <h3>レベルと個体値の候補</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>範囲</th>
-                    </tr>
-                </thead>
-                <tbody id="rangeResult">
-                </tbody>
-            </table>
-            <div class="form-group">
-                <input type="text" id="text-result" class="form-control" value=""/>
-            </div>
-            <div class="form-group">
-                <input type="button" class="btn btn-sm" value="結果をコピー" id="copy-result" data-clipboard-target="#text-result"/>
-            </div>
+                    <div class="row">
+                        <div class="col-md-2 form-group">
+                            <label>ポケモン名</label>
+                            <input type="text" id="name" name="name" class="form-control hidden-xs hidden-sm" value="フシギダネ"/>
+                            <select id="select-name" class="form-control hidden-md hidden-lg"></select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label>CP</label>
+                            <input type="number" name="cp" class="form-control" value="10"/>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label>HP</label>
+                            <input type="number" name="hp" class="form-control" value="10"/>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label>ほしのすな</label>
+                            <select class="form-control" id="stardust">
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div style="height:25px;" class="hidden-xs hidden-sm"></div>
+                            <input type="button" class="btn btn-sm" value="計算" id="calcCP"/>
+                            <input type="button" class="btn btn-sm" value="絞り込み" id="refine"/>
+                        </div>
+                    </div>
 
-            <br>
-            <h3>入力履歴</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>CP</th>
-                        <th>HP</th>
-                        <th>ほしのすな</th>
-                    </tr>
-                </thead>
-                <tbody id="input-history">
-                </tbody>
-            </table>
+                    <div class="control-form hidden-md hidden-lg">
+                        <label>スポンサードリンク
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- PokemonGoIVCalculator -->
+                            <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-9237856222871831"
+                                data-ad-slot="1594234509"
+                                data-ad-format="auto"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </label>
+                    </div>
+           
+                    <br>
 
-            <br>
-            <h3>詳細</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>レベル</th>
-                        <th>攻撃</th>
-                        <th>防御</th>
-                        <th>スタミナ</th>
-                    </tr>
-                </thead>
-                <tbody id="result">
-                </tbody>
-            </table>
-            
+                    <br>
+                    <div id="attention">
+                    </div>
+                    <br>
+                    <h3>レベルと個体値の候補</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>範囲</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rangeResult">
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <input type="text" id="text-result" class="form-control" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-sm" value="結果をコピー" id="copy-result" data-clipboard-target="#text-result"/>
+                    </div>
+
+                    <br>
+                    <h3>入力履歴</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>CP</th>
+                                <th>HP</th>
+                                <th>ほしのすな</th>
+                            </tr>
+                        </thead>
+                        <tbody id="input-history">
+                        </tbody>
+                    </table>
+
+                    <br>
+                    <h3>詳細</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>レベル</th>
+                                <th>攻撃</th>
+                                <th>防御</th>
+                                <th>スタミナ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="result">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="control-form">
+                        <label>スポンサードリンク
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- PokemonGoIVCalculator2 -->
+                            <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-9237856222871831"
+                                data-ad-slot="3070967703"
+                                data-ad-format="auto"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </label>
+                    </div>
+                </div>
+            </div>  
         </div>
     </body>
 </html>
