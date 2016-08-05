@@ -4,7 +4,8 @@
   "description": "ポケモンGO個体値計算機",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ./src/js/*",
+    "deploy": "gh-pages -d ./src"
   },
   "repository": {
     "type": "git",
@@ -17,9 +18,7 @@
   },
   "homepage": "https://github.com/odanado/PokemonGoIVCalculator#readme",
   "devDependencies": {
-    "eslint": "^3.2.2"
-  },
-  "scripts": {
-      "lint": "eslint ./src/js/*"
+    "eslint": "^3.2.2",
+    "gh-pages": "^0.11.0"
   }
 }
