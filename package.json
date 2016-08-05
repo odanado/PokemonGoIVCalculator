@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/odanado/PokemonGoIVCalculator/issues"
   },
-  "homepage": "https://github.com/odanado/PokemonGoIVCalculator#readme"
+  "homepage": "https://github.com/odanado/PokemonGoIVCalculator#readme",
+  "devDependencies": {
+    "eslint": "^3.2.2"
+  },
+  "scripts": {
+      "lint": "eslint ./src/js/*"
+  }
 }
