@@ -179,7 +179,7 @@ $(document).ready(function(){
     ]
 
     var makeNames = function() {
-        names = []
+        var names = []
         $.each(pokedex, function(idx, data) {
             names.push(data['name'])
         })
@@ -352,7 +352,7 @@ $(document).ready(function(){
         var iter = {level: 'レベル', attack: '攻撃', defense: '防御', stamina: 'スタミナ'};
 
         $.each(iter, function(key, value) {
-            result[key] = $.map(candIVs, function(v, idx) {
+            result[key] = $.map(candIVs, function(v) {
                 if (key == 'level') {
                     return v['level'] / 2 + 1;
                 }
@@ -383,7 +383,7 @@ $(document).ready(function(){
         $("#text-result").val(textResult);
     }
 
-    $('#calcCP').on('click', function(e) {
+    $('#calcCP').on('click', function() {
         candIVs = null;
         var input = getInput();
         clearInputHistory();
@@ -395,7 +395,7 @@ $(document).ready(function(){
         renderCandIV();
     })
 
-    $('#refine').on('click', function(e) {
+    $('#refine').on('click', function() {
         var input = getInput();
         
         refineIV(input);
@@ -405,7 +405,7 @@ $(document).ready(function(){
         renderCandIV();
     })
 
-    $('#select-name').change(function(e) {
+    $('#select-name').change(function() {
         $('input[name="name"]').val($(this).val());
     })
 
@@ -425,10 +425,6 @@ $(document).ready(function(){
     var clipboard = new Clipboard('#copy-result');
 
     clipboard.on('success', function(e) {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-
         e.clearSelection();
     });
 })
