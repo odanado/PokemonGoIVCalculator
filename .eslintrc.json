@@ -4,5 +4,7 @@
     "parserOptions": {},
     "env": {"browser": true, "jquery": true},
     "globals": {"Clipboard": true},
-    "rules": {}
+    "rules": {
+        "comma-dangle": 2
+    }
 }

@@ -157,7 +157,7 @@ $(document).ready(function(){
         {name: 'ハクリュー', base: { stamina: 122, attack: 170, defense: 152 } },
         {name: 'カイリュー', base: { stamina: 182, attack: 250, defense: 212 } },
         {name: 'ミュウツー', base: { stamina: 212, attack: 284, defense: 202 } },
-        {name: 'ミュウ', base: { stamina: 200, attack: 220, defense: 220 } },
+        {name: 'ミュウ', base: { stamina: 200, attack: 220, defense: 220 } }
     ]
     var CPM = [
         0.094, 0.1351374, 0.1663979, 0.1926509, 0.2157325,
