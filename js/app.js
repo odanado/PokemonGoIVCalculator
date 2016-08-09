@@ -157,7 +157,7 @@ $(document).ready(function(){
         {name: 'ハクリュー', base: { stamina: 122, attack: 170, defense: 152 } },
         {name: 'カイリュー', base: { stamina: 182, attack: 250, defense: 212 } },
         {name: 'ミュウツー', base: { stamina: 212, attack: 284, defense: 202 } },
-        {name: 'ミュウ', base: { stamina: 200, attack: 220, defense: 220 } },
+        {name: 'ミュウ', base: { stamina: 200, attack: 220, defense: 220 } }
     ]
     var CPM = [
         0.094, 0.1351374, 0.1663979, 0.1926509, 0.2157325,
@@ -179,7 +179,7 @@ $(document).ready(function(){
     ]
 
     var makeNames = function() {
-        names = []
+        var names = []
         $.each(pokedex, function(idx, data) {
             names.push(data['name'])
         })
@@ -352,7 +352,7 @@ $(document).ready(function(){
         var iter = {level: 'レベル', attack: '攻撃', defense: '防御', stamina: 'スタミナ'};
 
         $.each(iter, function(key, value) {
-            result[key] = $.map(candIVs, function(v, idx) {
+            result[key] = $.map(candIVs, function(v) {
                 if (key == 'level') {
                     return v['level'] / 2 + 1;
                 }
@@ -383,7 +383,7 @@ $(document).ready(function(){
         $("#text-result").val(textResult);
     }
 
-    $('#calcCP').on('click', function(e) {
+    $('#calcCP').on('click', function() {
         candIVs = null;
         var input = getInput();
         clearInputHistory();
@@ -395,7 +395,7 @@ $(document).ready(function(){
         renderCandIV();
     })
 
-    $('#refine').on('click', function(e) {
+    $('#refine').on('click', function() {
         var input = getInput();
         
         refineIV(input);
@@ -405,7 +405,7 @@ $(document).ready(function(){
         renderCandIV();
     })
 
-    $('#select-name').change(function(e) {
+    $('#select-name').change(function() {
         $('input[name="name"]').val($(this).val());
     })
 
@@ -425,10 +425,6 @@ $(document).ready(function(){
     var clipboard = new Clipboard('#copy-result');
 
     clipboard.on('success', function(e) {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-
         e.clearSelection();
     });
 })
